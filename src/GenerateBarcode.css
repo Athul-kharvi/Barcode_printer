@@ -1,0 +1,112 @@
+/* Reset and make sure there are no default margins or padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0f8ff; /* Light blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    margin: 0;
+    font-family: 'Montserrat', sans-serif; /* Updated font-family */
+    overflow: auto; /* Enable scrolling if content overflows */
+}
+
+.barcode-container {
+    background-color: #ffffff;
+    border-radius: 15px; /* Slightly rounded corners */
+    padding: 30px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center all items */
+    gap: 20px; /* Add space between items */
+    overflow: visible; /* Ensure container content isn't clipped */
+}
+
+h1 {
+    color: #1e90ff; /* Darker blue color */
+    margin-bottom: 20px; /* Space below the heading */
+    font-weight: 600; /* Make the heading bold */
+}
+
+.barcode-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center form elements */
+    gap: 15px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center labels and inputs */
+    width: 100%;
+}
+
+label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px; /* Space between label and input */
+    font-weight: 400; /* Normal font weight for labels */
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Rounded corners for inputs */
+    background-color: #f8f8f8; /* Off-white background for input */
+    color: black; /* Text color inside input fields */
+    font-family: 'Montserrat', sans-serif; /* Updated font-family */
+    transition: border-color 0.3s;
+    text-align: center; /* Center text in input */
+}
+
+input:focus {
+    border-color: #1e90ff; /* Blue border on focus */
+    outline: none;
+}
+
+.print-button {
+    background-color: #1e90ff;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px; /* Rounded corners for the button */
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif; /* Updated font-family */
+    font-weight: 600; /* Make the button text bold */
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%; /* Full width of the form */
+}
+
+.print-button:hover {
+    background-color: #4682b4;
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.print-button:active {
+    transform: translateY(0); /* Reset lift effect on click */
+}
+
+canvas {
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Rounded corners for canvas */
+    margin-top: 10px;
+}
+
+.barcode-info {
+    margin-top: 10px;
+    color: #555;
+    font-size: 14px;
+}
