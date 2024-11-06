@@ -1,13 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// // https://vite.dev/config/
-// export default defineConfig({
-//   plugins: [react()],
-// })
-
-export default {
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
   build: {
-    outDir: 'build', // Ensure it's 'build' or update Netlify's config to match 'dist'
+    outDir: 'build', // Set output directory to 'build' for Netlify or other hosting services
   },
-}
+})
