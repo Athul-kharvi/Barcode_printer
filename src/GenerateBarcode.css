@@ -105,8 +105,48 @@ canvas {
     margin-top: 10px;
 }
 
-.barcode-info {
-    margin-top: 10px;
-    color: #555;
-    font-size: 14px;
+.cool-dropdown {
+    appearance: none;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    color: white; /* White text color */
+    background-color: #007bff; /* Blue background for the dropdown */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+
+.cool-dropdown:hover {
+    border-color: #0056b3;
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.cool-dropdown:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+}
+
+.cool-dropdown::after {
+    content: '▼';
+    font-size: 12px;
+    color: white; /* White color for the arrow */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.cool-dropdown option {
+    padding: 5px;
+    background-color: white; /* White background for dropdown options */
+    color: black; /* Black text for dropdown options */
+    transition: background-color 0.3s ease;
+}
+
+.cool-dropdown option:hover {
+    background-color: #f0f8ff; /* Light blue background when hovering over an option */
 }

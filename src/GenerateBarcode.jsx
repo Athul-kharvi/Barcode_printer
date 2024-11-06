@@ -6,6 +6,7 @@ const GenerateBarcode = () => {
     const [barcodeValue, setBarcodeValue] = useState('');
     const [productName, setProductName] = useState('');
     const [productPrice, setProductPrice] = useState('');
+    const [format, setFormat] = useState('Normal');
     const canvasRef = useRef();
 
     useEffect(() => {
@@ -54,36 +55,42 @@ const GenerateBarcode = () => {
         const canvas = canvasRef.current;
         const dataUrl = canvas.toDataURL('image/png');
         const newWindow = window.open('', '_blank', 'width=600,height=400');
-        
-        newWindow.document.write(`
+
+        const htmlContent = `
             <html>
                 <head>
-                    <title>Print Barcode</title>
+                    <title>Print Barcode - ${format}</title>
                     <style>
                         body {
                             font-family: Arial, sans-serif;
+                            margin: 0; /* Remove default margins */
                             display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            height: 100vh;
-                            margin: 0;
-                            background-color: #f9f9f9; /* Light background for the entire page */
+                            justify-content: center; /* Center horizontally */
+                            align-items: center; /* Center vertically */
+                            height: 100vh; /* Full viewport height to enable vertical centering */
+                            background-color: #f9f9f9; /* Optional background color */
                         }
+
                         .barcode-container {
                             display: flex;
-                            align-items: center;
-                            gap: 20px; /* Space between the barcode image and product details */
-                            // border: 2px solid black; /* Solid black border */
-                            padding: 15px; /* Padding inside the container */
-                            background-color: #949392; 
-                            border-radius: 10px; /* Rounded corners */
+                            flex-direction: ${format === 'Rattail' ? 'row' : 'column'};
+                            align-items: ${format ==='Normal' ? 'center':''};
+                            padding: 5px;
+                            width:    ${format ==='Rattail' ? '30rem':'25rem'};
+                            border: 1px solid black;
+                            padding: 10px;
+                            background-color: #eee;
+                            border-radius: 8px;
                         }
                         .barcode-image {
-                            max-width: 200px; /* Adjust the image size as needed */
-                            max-height: 100px; /* Keep the image within reasonable bounds */
+                            width: 200px;
+                            height: 100px;
+                            margin: ${format === 'Rattail' ? '0 10px 0 0' : '0 0 10px 0'};
                         }
                         .product-details {
-                            text-align: left;
+                            margin-left: ${format === 'Rattail' ? '50px' : ''};
+                            margin-top: ${format === 'Rattail' ? '20px' : ''};
+                            text-align: center;
                         }
                         .product-name {
                             font-size: 18px;
@@ -93,11 +100,11 @@ const GenerateBarcode = () => {
                         .product-price {
                             font-size: 16px;
                             color: #555;
-                            margin: 5px 0 0 0;
+                            margin: 5px 0 0;
                         }
                     </style>
                 </head>
-                <body onload="setTimeout(() => { window.print(); window.close(); }, 100);">
+                <body onload="window.print(); window.close();">
                     <div class="barcode-container">
                         <img src="${dataUrl}" alt="Barcode" class="barcode-image" />
                         <div class="product-details">
@@ -107,11 +114,11 @@ const GenerateBarcode = () => {
                     </div>
                 </body>
             </html>
-        `);
-        
+        `;
+
+        newWindow.document.write(htmlContent);
         newWindow.document.close();
     };
-    
 
     return (
         <div className="barcode-container">
@@ -153,16 +160,25 @@ const GenerateBarcode = () => {
                         />
                     </label>
                 </div>
+                <div className="form-group">
+                    <label>
+                        Format:
+                        <select
+                            value={format}
+                            onChange={(e) => setFormat(e.target.value)}
+                            className="cool-dropdown"
+                        >
+                            <option value="Normal">Normal</option>
+                            <option value="Rattail">Rattail</option>
+                        </select>
+                    </label>
+                </div>
                 <button type="button" onClick={handlePrint} className="print-button">
                     Print
                 </button>
             </form>
 
             <canvas ref={canvasRef} width={300} height={100} style={{ border: '1px solid black' }} />
-            <div className="barcode-info">
-                <p>Product: {productName}</p>
-                <p>Price: Rs {productPrice}</p>
-            </div>
         </div>
     );
 };
