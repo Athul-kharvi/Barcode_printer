@@ -1,10 +1,11 @@
-/* Reset and make sure there are no default margins or padding */
+/* General reset for margins and padding */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body styling */
 body {
     background-color: #f0f8ff; /* Light blue background */
     display: flex;
@@ -12,13 +13,14 @@ body {
     align-items: center;
     min-height: 100vh; /* Full viewport height */
     margin: 0;
-    font-family: 'Montserrat', sans-serif; /* Updated font-family */
+    font-family: 'Montserrat', sans-serif; /* Font family */
     overflow: auto; /* Enable scrolling if content overflows */
 }
 
+/* Barcode container styling */
 .barcode-container {
     background-color: #ffffff;
-    border-radius: 15px; /* Slightly rounded corners */
+    border-radius: 15px; /* Rounded corners */
     padding: 30px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -26,49 +28,54 @@ body {
     max-width: 450px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center all items */
-    gap: 20px; /* Add space between items */
+    align-items: center;
+    gap: 20px;
     overflow: visible; /* Ensure container content isn't clipped */
 }
 
+/* Heading styles */
 h1 {
-    color: #1e90ff; /* Darker blue color */
-    margin-bottom: 20px; /* Space below the heading */
-    font-weight: 600; /* Make the heading bold */
+    color: #1e90ff; /* Darker blue */
+    margin-bottom: 20px;
+    font-weight: 600; /* Bold */
 }
 
+/* Form container styles */
 .barcode-form {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center form elements */
+    align-items: center;
     gap: 15px;
     width: 100%;
 }
 
+/* Form group styles */
 .form-group {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center labels and inputs */
+    align-items: center;
     width: 100%;
 }
 
+/* Label styling */
 label {
     font-size: 14px;
     color: #333;
     margin-bottom: 5px; /* Space between label and input */
-    font-weight: 400; /* Normal font weight for labels */
+    font-weight: 400;
 }
 
+/* Input field styling */
 input {
     width: 90%;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 8px; /* Rounded corners for inputs */
-    background-color: #f8f8f8; /* Off-white background for input */
-    color: black; /* Text color inside input fields */
-    font-family: 'Montserrat', sans-serif; /* Updated font-family */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f8f8f8; /* Off-white background */
+    color: black;
+    font-family: 'Montserrat', sans-serif;
     transition: border-color 0.3s;
-    text-align: center; /* Center text in input */
+    text-align: center; /* Center text */
 }
 
 input:focus {
@@ -76,43 +83,45 @@ input:focus {
     outline: none;
 }
 
+/* Print button styles */
 .print-button {
     background-color: #1e90ff;
     color: #ffffff;
     border: none;
     padding: 12px 20px;
-    border-radius: 10px; /* Rounded corners for the button */
+    border-radius: 10px; /* Rounded corners */
     cursor: pointer;
     font-size: 16px;
-    font-family: 'Montserrat', sans-serif; /* Updated font-family */
-    font-weight: 600; /* Make the button text bold */
+    font-weight: 600;
     transition: background-color 0.3s, transform 0.2s;
-    width: 100%; /* Full width of the form */
+    width: 100%;
 }
 
 .print-button:hover {
     background-color: #4682b4;
-    transform: translateY(-2px); /* Slight lift effect on hover */
+    transform: translateY(-2px); /* Slight lift effect */
 }
 
 .print-button:active {
     transform: translateY(0); /* Reset lift effect on click */
 }
 
+/* Canvas styling */
 canvas {
     border: 1px solid #ddd;
-    border-radius: 10px; /* Rounded corners for canvas */
+    border-radius: 10px;
     margin-top: 10px;
 }
 
+/* Dropdown styling */
 .cool-dropdown {
     appearance: none;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
     font-size: 16px;
-    color: white; /* White text color */
-    background-color: #007bff; /* Blue background for the dropdown */
+    color: white;
+    background-color: #007bff; /* Blue background */
     transition: all 0.3s ease;
     cursor: pointer;
     outline: none;
@@ -129,10 +138,11 @@ canvas {
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
 }
 
+/* Dropdown arrow styling */
 .cool-dropdown::after {
     content: '▼';
     font-size: 12px;
-    color: white; /* White color for the arrow */
+    color: white;
     position: absolute;
     right: 10px;
     top: 50%;
@@ -140,13 +150,76 @@ canvas {
     pointer-events: none;
 }
 
+/* Dropdown option styling */
 .cool-dropdown option {
     padding: 5px;
-    background-color: white; /* White background for dropdown options */
-    color: black; /* Black text for dropdown options */
+    background-color: white;
+    color: black;
     transition: background-color 0.3s ease;
 }
 
 .cool-dropdown option:hover {
-    background-color: #f0f8ff; /* Light blue background when hovering over an option */
+    background-color: #f0f8ff; /* Light blue background on hover */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    .barcode-container {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .barcode-form {
+        width: 100%;
+    }
+
+    input, .cool-dropdown {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .print-button {
+        font-size: 18px;
+        padding: 15px;
+    }
+
+    canvas {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Desktop responsiveness */
+@media (min-width: 601px) {
+    .barcode-container {
+        padding: 40px;
+        max-width: 450px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .barcode-form {
+        width: 90%;
+    }
+
+    input, .cool-dropdown {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .print-button {
+        font-size: 18px;
+        padding: 12px 20px;
+    }
+
+    canvas {
+        width: 300px;
+        height: auto;
+    }
 }

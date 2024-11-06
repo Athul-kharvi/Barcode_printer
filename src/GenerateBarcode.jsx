@@ -9,18 +9,20 @@ const GenerateBarcode = () => {
     const [format, setFormat] = useState('Normal');
     const canvasRef = useRef();
 
+    // Use useEffect to update the barcode when any of the inputs change
     useEffect(() => {
         if (barcodeValue.trim()) {
             generateBarcode();
         }
-    }, [barcodeValue]);
+    }, [barcodeValue, productName, productPrice]); // Depend on barcode value, name, and price
 
     const generateBarcode = () => {
         try {
             const canvas = canvasRef.current;
             const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 
+            // Generate the barcode with bwipjs
             bwipjs.toCanvas(canvas, {
                 bcid: 'code128',
                 text: barcodeValue,
@@ -32,6 +34,7 @@ const GenerateBarcode = () => {
                 if (err) {
                     console.error('Error generating barcode:', err);
                 } else {
+                    // Draw the product details below the barcode after it is generated
                     drawProductDetails();
                 }
             });
@@ -47,8 +50,12 @@ const GenerateBarcode = () => {
         ctx.fillStyle = 'black';
         ctx.textAlign = 'center';
 
-        ctx.fillText(productName, canvas.width / 2, canvas.height - 20);
-        ctx.fillText(`Price: Rs ${productPrice}`, canvas.width / 2, canvas.height - 5);
+        // Ensure there's space below the barcode before drawing text
+        if (productName && productPrice) {
+            const barcodeHeight = 100; // Adjust as needed based on your barcode size
+            ctx.fillText(productName, canvas.width / 2, barcodeHeight + 20); // Product Name
+            ctx.fillText(`Price: Rs ${productPrice}`, canvas.width / 2, barcodeHeight + 40); // Price
+        }
     };
 
     const handlePrint = () => {
@@ -63,20 +70,19 @@ const GenerateBarcode = () => {
                     <style>
                         body {
                             font-family: Arial, sans-serif;
-                            margin: 0; /* Remove default margins */
+                            margin: 0;
                             display: flex;
-                            justify-content: center; /* Center horizontally */
-                            align-items: center; /* Center vertically */
-                            height: 100vh; /* Full viewport height to enable vertical centering */
-                            background-color: #f9f9f9; /* Optional background color */
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            background-color: #f9f9f9;
                         }
-
                         .barcode-container {
                             display: flex;
                             flex-direction: ${format === 'Rattail' ? 'row' : 'column'};
-                            align-items: ${format ==='Normal' ? 'center':''};
+                            align-items: ${format === 'Normal' ? 'center' : ''};
                             padding: 5px;
-                            width:    ${format ==='Rattail' ? '30rem':'25rem'};
+                            width: ${format === 'Rattail' ? '30rem' : '25rem'};
                             border: 1px solid black;
                             padding: 10px;
                             background-color: #eee;
@@ -178,7 +184,7 @@ const GenerateBarcode = () => {
                 </button>
             </form>
 
-            <canvas ref={canvasRef} width={300} height={100} style={{ border: '1px solid black' }} />
+            <canvas ref={canvasRef} width={300} height={150} style={{ border: '1px solid black' }} />
         </div>
     );
 };
